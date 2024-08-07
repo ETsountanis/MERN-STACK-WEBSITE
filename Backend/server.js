@@ -1,22 +1,32 @@
-//Dino access sto .ENV
-require('dotenv').config();
+require('dotenv').config()
 
-const express = require('express');
+const express = require('express')
+const mongoose = require('mongoose')
+const workoutRoutes = require('./routes/workouts')
 
-const app = express();
+// express app
+const app = express()
 
+// middleware
+app.use(express.json())
 
-//routes 
-
-app.use((req , res , next )=> {
-    console.log(req.path,req.method)
-    next();
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
 })
 
-app.get('/', (req,res) =>{
-    res.json({msg: 'welcome to the app '})
-})
+// routes
+app.use('/api/workouts', workoutRoutes)
 
-app.listen(process.env.PORT, ()=> {
-    console.log(`listening on port ${process.env.PORT}`);
-})
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('connected to database')
+    // listen to port
+    app.listen(process.env.PORT, () => {
+      console.log('listening for requests on port', process.env.PORT)
+    })
+  })
+  .catch((err) => {
+    console.log(err)
+  }) 
