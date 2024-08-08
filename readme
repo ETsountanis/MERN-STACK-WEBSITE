@@ -1,4 +1,6 @@
-THIS IS MY MERN STACK UP , WHERE I ATTEMPT TO USE THE MERN STACK TECHNOLOGIES .
+THIS IS MY MERN STACK APP , WHERE I ATTEMPT TO USE THE MERN STACK TECHNOLOGIES .
 
 INSTALLATION :
 use < npm ci > in  the routes path test
+
+Remember to check mongo ip to be set on local
